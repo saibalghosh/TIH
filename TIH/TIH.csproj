@@ -101,11 +101,11 @@
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Helpers\ArrayConverter.cs" />
     <Compile Include="HistoricalDataService.svc.cs">
       <DependentUpon>HistoricalDataService.svc</DependentUpon>
     </Compile>
     <Compile Include="IHistoricalDataService.cs" />
-    <Compile Include="Models\HistoricalData.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -117,6 +117,7 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="Service References\Application Insights\ConnectedService.json" />
+    <None Include="Properties\PublishProfiles\todayinhistory - Web Deploy.pubxml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
