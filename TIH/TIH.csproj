@@ -102,6 +102,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Helpers\ArrayConverter.cs" />
+    <Compile Include="Helpers\DatabaseManager.cs" />
     <Compile Include="HistoricalDataService.svc.cs">
       <DependentUpon>HistoricalDataService.svc</DependentUpon>
     </Compile>
