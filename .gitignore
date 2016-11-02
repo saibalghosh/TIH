@@ -30,6 +30,9 @@ bld/
 # All config files
 *.config
 
+#Publish Profile Directories
+PublishProfiles/
+
 # MSTest test Results
 [Tt]est[Rr]esult*/
 [Bb]uild[Ll]og.*
