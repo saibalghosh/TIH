@@ -1,6 +1,7 @@
 ﻿using System.Data;
 using System.Data.SqlClient;
 using System.Configuration;
+using System;
 
 namespace TIH.Helpers
 {
@@ -18,11 +19,18 @@ namespace TIH.Helpers
 
         private SqlConnection getOpenDbConnection()
         {
-            if(_connection.State == ConnectionState.Closed || _connection.State == ConnectionState.Broken)
+            try
             {
-                _connection.Open();
+                if (_connection.State == ConnectionState.Closed || _connection.State == ConnectionState.Broken)
+                {
+                    _connection.Open();
+                }
+                return _connection;
             }
-            return _connection;
+            catch(Exception ex)
+            {
+                throw ex;
+            }
         }
 
         public DataTable ExecuteSelectQuery(string sqlQuery, SqlParameter[] sqlParameters)
