@@ -28,10 +28,10 @@ namespace TIH
                     strSqlQuery = "SELECT Epoch, Birthday FROM Birthdays WHERE DATEPART(MM, Epoch) = @month AND DATEPART(dd, Epoch) =@day";
                     break;
                 case "WeddingsAndDivorces":
-                    strSqlQuery = "SELECT Epoch, Death FROM WeddingsAndDivorces WHERE DATEPART(MM, Epoch) = @month AND DATEPART(dd, Epoch) =@day";
+                    strSqlQuery = "SELECT Epoch, WeddingOrDivorce FROM WeddingsAndDivorces WHERE DATEPART(MM, Epoch) = @month AND DATEPART(dd, Epoch) =@day";
                     break;
                 case "Deaths":
-                    strSqlQuery = "SELECT Epoch, WeddingOrDivorce FROM Deaths WHERE DATEPART(MM, Epoch) = @month AND DATEPART(dd, Epoch) =@day";
+                    strSqlQuery = "SELECT Epoch, Death FROM Deaths WHERE DATEPART(MM, Epoch) = @month AND DATEPART(dd, Epoch) =@day";
                     break;
             }
 
