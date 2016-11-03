@@ -27,38 +27,44 @@ namespace TIH.Helpers
                 }
                 return _connection;
             }
-            catch(Exception ex)
+            catch
             {
-                throw ex;
+                throw new Exception("Could not open a connection to the database.");
             }
         }
 
-        public DataTable ExecuteSelectQuery(string sqlQuery, SqlParameter[] sqlParameters)
+        public DataTable ExecuteSelectQueryByProcedureName(string procedureName, SqlParameter[] sqlParameters)
         {
-            DataTable dtQueryResults = new DataTable();
-            dtQueryResults = null;
-            DataSet dsQueryResults = new DataSet();
+            DataTable dtQueryResults;
 
             try
             {
                 using (_command = new SqlCommand())
                 {
-                    _command.Connection = getOpenDbConnection();
-                    _command.CommandText = sqlQuery;
-                    _command.Parameters.AddRange(sqlParameters);
-                    _command.ExecuteNonQuery();
-                    _adapter.SelectCommand = _command;
-                    _adapter.Fill(dsQueryResults);
-                    dtQueryResults = dsQueryResults.Tables[0];
+                    
+                    _command.CommandText = procedureName;
+                    _command.CommandType = CommandType.StoredProcedure;
+                    foreach (SqlParameter parameter in sqlParameters)
+                    {
+                        _command.Parameters.AddWithValue(parameter.ParameterName, parameter.Value);
+                    }
+                    using (_command.Connection = getOpenDbConnection())
+                    using (SqlDataReader reader = _command.ExecuteReader())
+                    {
+                        dtQueryResults = new DataTable();
+                        dtQueryResults.Load(reader);
+                    }
                 }
             }
+
             catch
             {
                 return null;
             }
+
             finally
             {
-                if (_command.Connection != null)
+                if (_command.Connection != null && _command.Connection.State != ConnectionState.Closed)
                 {
                     _command.Connection.Close();
                 }

@@ -8,7 +8,7 @@ namespace TIH
 {
     public class HistoricalDataService : IHistoricalDataService
     {
-        string strSqlQuery;
+        string strProcedureName;
         DataTable dtResults;
         string[,] listOfResults;
 
@@ -22,16 +22,16 @@ namespace TIH
             switch (historicDataType)
             {
                 case "Events":
-                    strSqlQuery = "SELECT Epoch, Event FROM Events WHERE DATEPART(MM, Epoch) = @month AND DATEPART(dd, Epoch) =@day";
+                    strProcedureName = "GetEventsByDate";
                     break;
                 case "Birthdays":
-                    strSqlQuery = "SELECT Epoch, Birthday FROM Birthdays WHERE DATEPART(MM, Epoch) = @month AND DATEPART(dd, Epoch) =@day";
+                    strProcedureName = "GetBirthdaysByDate";
                     break;
                 case "WeddingsAndDivorces":
-                    strSqlQuery = "SELECT Epoch, WeddingOrDivorce FROM WeddingsAndDivorces WHERE DATEPART(MM, Epoch) = @month AND DATEPART(dd, Epoch) =@day";
+                    strProcedureName = "GetWeddingsAndDivorcesByDate";
                     break;
                 case "Deaths":
-                    strSqlQuery = "SELECT Epoch, Death FROM Deaths WHERE DATEPART(MM, Epoch) = @month AND DATEPART(dd, Epoch) =@day";
+                    strProcedureName = "GetDeathsByDate";
                     break;
             }
 
@@ -44,7 +44,7 @@ namespace TIH
                                 };
 
                 DatabaseManager dbManager = new DatabaseManager();
-                dtResults = dbManager.ExecuteSelectQuery(strSqlQuery, sqlQueryParameters);
+                dtResults = dbManager.ExecuteSelectQueryByProcedureName(strProcedureName, sqlQueryParameters);
 
                 if (dtResults != null)
                 {
