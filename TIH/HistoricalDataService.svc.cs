@@ -52,7 +52,7 @@ namespace TIH
 
                     for (int i = 0; i < dtResults.Rows.Count; i++)
                     {
-                        listOfResults[i, 0] = ((System.DateTime)(dtResults.Rows[i]).ItemArray[0]).Date.Year.ToString();
+                        listOfResults[i, 0] = ((System.DateTime)(dtResults.Rows[i]).ItemArray[0]).ToString();
                         listOfResults[i, 1] = (String)(dtResults.Rows[i]).ItemArray[1];
                     }
                 }
